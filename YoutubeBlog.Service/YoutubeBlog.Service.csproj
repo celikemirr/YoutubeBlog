@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YoutubeBlog.Data\YoutubeBlog.Data.csproj" />
+    <ProjectReference Include="..\YoutubeBlog.Entity\YoutubeBlog.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

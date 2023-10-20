@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YoutubeBlog.Data\YoutubeBlog.Data.csproj" />
+    <ProjectReference Include="..\YoutubeBlog.Service\YoutubeBlog.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,6 +18,8 @@ namespace YoutubeBlog.Data.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
+        //Burada genişletme yöntemi kullanıyoruz (bir sınıfın veya türün mevcut işlevselliğini genişletmek amacıyla kullanılır)
+        //Static bir sınıfta tanımlanmasının nedeni, bu tür genişletme yöntemlerinin nesne örneği oluşturmadan çağrılabilmesidir
         //AddScoped metodu, ASP.NET Core uygulamalarında servislerin nasıl yaşam döngüsüne sahip olacağını belirlemek için kullanılan bir konfigürasyon metodudur.
         //buradaki amacımız IRepository i nesnesini çağırdıgımızda bize Repository nesnesi oluşturması gerektiğini belirticez scope olarak ekleyerek
         //IRepository e yollanan her istekte Repository de getirilicektir

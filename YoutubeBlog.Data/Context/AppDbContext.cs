@@ -1,10 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using YoutubeBlog.Entity.Entities;
 
 namespace YoutubeBlog.Data.Context
 {
-    public class AppDbContext : DbContext
+    //identity yapımızı kurarken ilk önce identity entityframeworkcore sınıfımızı indiriyoruz
+    //sonrasında microsofttan örnek alarak baktıgımız entitylerimi oluşturuyoruz
+    //daha sonra hazır kütüphanede ki sınıfları miras olarak entitylerimize ekliyoruz
+    //bunu da dbcontext kısmında belirtip miras alınan sınıfı IdentityDbContext olarak değiştiriyoruz
+    //daha sonra base olarak onmodelcreating methodunu çağırıyoruz
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,Guid,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
         protected AppDbContext()
         {
@@ -20,6 +26,7 @@ namespace YoutubeBlog.Data.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); 
         }
     }

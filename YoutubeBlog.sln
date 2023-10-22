@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeBlog.Web", "YoutubeBlog.Web\YoutubeBlog.Web.csproj", "{17D46872-7B20-45D2-A8AA-0D09FD3D2E43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeBlog.Web", "YoutubeBlog.Web\YoutubeBlog.Web.csproj", "{17D46872-7B20-45D2-A8AA-0D09FD3D2E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeBlog.Entity", "YoutubeBlog.Entity\YoutubeBlog.Entity.csproj", "{59392526-419A-4772-9F5D-6296B53C829B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeBlog.Entity", "YoutubeBlog.Entity\YoutubeBlog.Entity.csproj", "{59392526-419A-4772-9F5D-6296B53C829B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeBlog.Data", "YoutubeBlog.Data\YoutubeBlog.Data.csproj", "{6B1AD0CE-3B8E-4D18-BBE8-36EF7CD0E0A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeBlog.Data", "YoutubeBlog.Data\YoutubeBlog.Data.csproj", "{6B1AD0CE-3B8E-4D18-BBE8-36EF7CD0E0A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeBlog.Service", "YoutubeBlog.Service\YoutubeBlog.Service.csproj", "{F9FEC514-A1F8-4770-953B-BB6EF7E29153}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeBlog.Service", "YoutubeBlog.Service\YoutubeBlog.Service.csproj", "{F9FEC514-A1F8-4770-953B-BB6EF7E29153}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeBlog.Core", "YoutubeBlog.Core\YoutubeBlog.Core.csproj", "{A1D697A0-90A3-413A-952E-02AC74D7C681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeBlog.Core", "YoutubeBlog.Core\YoutubeBlog.Core.csproj", "{A1D697A0-90A3-413A-952E-02AC74D7C681}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

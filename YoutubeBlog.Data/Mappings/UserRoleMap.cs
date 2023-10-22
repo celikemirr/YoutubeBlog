@@ -9,10 +9,10 @@ using YoutubeBlog.Entity.Entities;
 
 namespace YoutubeBlog.Data.Mappings
 {
-	public class UserRoleMap : IEntityTypeConfiguration<AppUserRole>
-	{
-		public void Configure(EntityTypeBuilder<AppUserRole> builder)
-		{
+    public class UserRoleMap : IEntityTypeConfiguration<AppUserRole>
+    {
+        public void Configure(EntityTypeBuilder<AppUserRole> builder)
+        {
             // Primary key
             builder.HasKey(r => new { r.UserId, r.RoleId });
 
@@ -29,7 +29,6 @@ namespace YoutubeBlog.Data.Mappings
                 UserId = Guid.Parse("7B3F84A7-3D85-4231-861B-D61C048E2380"),
                 RoleId = Guid.Parse("174309FC-CF51-4EC4-8CB2-CE8DB8DC04F9")
             });
-            //
         }
-	}
+    }
 }

@@ -10,10 +10,10 @@ using YoutubeBlog.Entity.Entities;
 
 namespace YoutubeBlog.Data.Mappings
 {
-	public class UserMap : IEntityTypeConfiguration<AppUser>
-	{
-		public void Configure(EntityTypeBuilder<AppUser> builder)
-		{
+    public class UserMap : IEntityTypeConfiguration<AppUser>
+    {
+        public void Configure(EntityTypeBuilder<AppUser> builder)
+        {
             builder.HasKey(u => u.Id);
 
             // Indexes for "normalized" username and email, to allow efficient lookups
@@ -58,8 +58,9 @@ namespace YoutubeBlog.Data.Mappings
                 FirstName = "Emir",
                 LastName = "Celik",
                 PhoneNumberConfirmed = true,
-                EmailConfirmed = true,  
-                SecurityStamp = Guid.NewGuid().ToString()
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ImageId = Guid.Parse("10C694E0-0796-4AB4-B664-C8B74830CA68")
 
             };
             superAdmin.PasswordHash = CreatePasswordHash(superAdmin, "123456");
@@ -76,7 +77,8 @@ namespace YoutubeBlog.Data.Mappings
                 LastName = "Celik",
                 PhoneNumberConfirmed = false,
                 EmailConfirmed = false,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ImageId = Guid.Parse("C4C4D9EA-9E80-4F11-9FD4-6590B167C0A3")
             };
             admin.PasswordHash = CreatePasswordHash(admin, "123456");
 
@@ -86,11 +88,11 @@ namespace YoutubeBlog.Data.Mappings
             //Role ve User çoka çok ilişki içerisinde olduğu için ikisi içinde ayrı GUİD ler belirlemek zorundayız
         }
         //Identity yapılanması kurarken user için password u biz oluşturamıyoruz bu sebeple bu yapıyı kurmamız gerekiyor data seeds eklemek için
-        private string CreatePasswordHash(AppUser user,string password)
+        private string CreatePasswordHash(AppUser user, string password)
         {
             var passwordHasher = new PasswordHasher<AppUser>();
 
-            return passwordHasher.HashPassword(user,password);
+            return passwordHasher.HashPassword(user, password);
         }
-	}
+    }
 }

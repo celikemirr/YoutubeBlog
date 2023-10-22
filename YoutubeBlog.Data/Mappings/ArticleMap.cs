@@ -17,7 +17,7 @@ namespace YoutubeBlog.Data.Mappings
             builder.HasData(new Article
             {
                 Id = Guid.NewGuid(),
-                Title = "Asp .Net Core Denem Makalesi 1",
+                Title = "Asp .Net Core Deneme Makalesi 1",
                 Content = "ASP .NET Core Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n",
                 ViewCount = 15,
                 CategoryId = Guid.Parse("5DDBDA80-1B6B-40C7-883C-09327C5DB051"),
@@ -31,7 +31,7 @@ namespace YoutubeBlog.Data.Mappings
             new Article 
             {
                 Id = Guid.NewGuid(),
-                Title = "Visual Studio Denem Makalesi 1",
+                Title = "Visual Studio Deneme Makalesi 1",
                 Content = "Visual Studio Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n",
                 ViewCount = 15,
                 CategoryId = Guid.Parse("C7BD74B3-9849-4543-920E-765685029892"),

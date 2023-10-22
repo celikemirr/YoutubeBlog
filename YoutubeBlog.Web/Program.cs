@@ -49,7 +49,7 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.SlidingExpiration = true;
     //cookie nin sistemde ne kadar tutulacaðý anlamýna geliyor
     config.ExpireTimeSpan = TimeSpan.FromDays(7);
-    config.AccessDeniedPath = new PathString("Admin/Auth/AccessDenied");
+    config.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
 });
 
 

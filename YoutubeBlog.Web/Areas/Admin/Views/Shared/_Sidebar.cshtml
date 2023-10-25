@@ -1,0 +1,90 @@
+﻿			<!-- Dashboards -->
+<li class="menu-item active">
+	<a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bxs-dashboard'></i>
+		<div data-i18n="Analytics"> DashBoard </div>
+	</a>
+</li>
+
+<li class="menu-header small text-uppercase">
+	<span class="menu-header-text"> CONTROLPAGE </span>
+</li>
+<!-- Pages -->
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="Category" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-category-alt'></i>
+		<div data-i18n="Analytics"> CategoryControl </div>
+	</a>
+</li>
+
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="SocialMedia" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-cube-alt'></i>
+		<div data-i18n="Analytics"> MediaControl </div>
+	</a>
+</li>
+
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="Article" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-paper-plane'></i>
+		<div data-i18n="Analytics"> ArticleControl </div>
+	</a>
+</li>
+
+<!-- Users -->
+<li class="menu-header small text-uppercase"><span class="menu-header-text"> USERS </span></li>
+<!-- Cards -->
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="User" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-user'></i>
+		<div data-i18n="Basic">Users</div>
+	</a>
+</li>
+
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="Article" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-lock-open-alt'></i>
+		<div data-i18n="Basic">Role</div>
+	</a>
+</li>
+
+<!-- SETTINGS -->
+<li class="menu-header small text-uppercase"><span class="menu-header-text"> SETTINGS </span></li>
+<!-- Forms -->
+<!-- Tables -->
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="Smtp" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-cog'></i>
+		<div data-i18n="Tables">Smtp Settings</div>
+	</a>
+</li>
+
+<!-- recycle -->
+<li class="menu-header small text-uppercase"><span class="menu-header-text"> RECYCL </span></li>
+<li class="menu-item">
+	<a href="Javascript:void(0);" class="menu-link menu-toggle">
+		<i class="menu-icon tf-icons bx bx-trash"></i>
+		<div data-i18n="Account Settings">Isactive Elements</div>
+	</a>
+	<ul class="menu-sub">
+		<li class="menu-item">
+			<a asp-area="Admin" asp-controller="Article" asp-action="DeletedArticles" class="menu-link">
+				<div data-i18n="Account">Article</div>
+			</a>
+		</li>
+
+		<li class="menu-item">
+			<a asp-area="Admin" asp-controller="Category" asp-action="DeletedCategories" class="menu-link">
+				<div data-i18n="Notifications">Category</div>
+			</a>
+		</li>
+
+		<li class="menu-item">
+			<a asp-area="Admin" asp-controller="SocialMedia" asp-action="DeletedMedias" class="menu-link">
+				<div data-i18n="Connections">Media</div>
+			</a>
+		</li>
+
+	</ul>
+	</aside>
+	<!-- / Menu -->

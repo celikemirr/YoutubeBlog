@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+
+
     $('#articlesTable').DataTable({
         dom:
             "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
@@ -33,7 +35,7 @@ $(document).ready(function () {
             "select": {
                 "rows": {
                     "_": "%d Registration selected",
-                    "0": "",
+                    "0": "hi",
                     "1": "1 registration selected"
                 }
             }

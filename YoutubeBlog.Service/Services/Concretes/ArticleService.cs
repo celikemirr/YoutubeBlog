@@ -18,9 +18,11 @@ namespace YoutubeBlog.Service.Services.Concretes
             this.mapper = mapper;
         }
 
-        public async Task<List<ArticleDto>> GetAllArticlesAsync()
+        //alttaki metotta demek istediğimiz bütün makaleleri kategorileriyle beraber getir ama silinmeyenleri getirtmek için bu şekilde isimlendiriyoruz
+        public async Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync()
         {
-            var articles = await unitOfWork.GetRepository<Article>().GetAllAsync();
+            var articles = await unitOfWork.GetRepository<Article>().GetAllAsync(x =>!x.IsDeleted, x=>x.Category);
+            //x in başındaki ünlem false değer olması için konulmuştur normalde x true olarak gelir
             var map = mapper.Map<List<ArticleDto>>(articles);
 
             return map;

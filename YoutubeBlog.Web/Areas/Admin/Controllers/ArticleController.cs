@@ -17,5 +17,10 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             var articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
             return View(articles);
         }
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            return View();
+        }
     }
 }

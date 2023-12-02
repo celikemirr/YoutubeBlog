@@ -63,6 +63,16 @@ namespace YoutubeBlog.Service.Services.Concretes
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
         }
+        public async Task SafeDeleteArticleAsync(Guid articleId)
+        {
+            var article = await unitOfWork.GetRepository<Article>().GetByGuidAsync(articleId);
+
+            article.IsDeleted = true;
+            article.DeletedDate = DateTime.Now;
+
+            await unitOfWork.GetRepository<Article>().UpdateAsync(article);
+            await unitOfWork.SaveAsync();
+        }
 	}
     //servislerde filtreleme kullanabileceğimiz için örnek oluşturulma tarihi en son olanı başta getir gibi
     //bunun gibi durumlar söz konusu olacağı için bu yapıyı kullanıcaz

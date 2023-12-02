@@ -35,7 +35,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 		{
 
 			await articleService.CreateArticleAsync(articleAddDto);
-			RedirectToAction("Index", "Article", new { area = "Admin" });
+			return RedirectToAction("Index", "Article", new { area = "Admin" });
 
 
 			var categories = await categoryService.GetAllCategoriesNonDeleted();

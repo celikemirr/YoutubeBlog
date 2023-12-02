@@ -12,7 +12,7 @@ namespace YoutubeBlog.Core.Entities
         // Interface oluşturuyoruz ki bu projede çalışacak olan bir sonraki kişiyi class oluşturmak için zorunlu bırakmalıyız ki projemizin yapısı bozulmasın
         // sınıfı soyut oluşturuyoruz çünkü her değiştirdimiz şeyin veritabanına yansımasını istemiyoruz
         public virtual Guid Id { get; set; } = Guid.NewGuid(); //int seçince 1 er 1 er artıyor fakat guid de bu sorun olabileceği için new guide kullanıyoruz
-        public virtual string CreatedBy { get; set; }
+        public virtual string CreatedBy { get; set; } = "Undefined";
         public virtual string? ModifiendBy { get; set; }
         public virtual string? DeletedBy { get; set; }
         public virtual DateTime CreatedDate { get; set; } = DateTime.Now;

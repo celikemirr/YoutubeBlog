@@ -12,8 +12,10 @@ namespace YoutubeBlog.Service.Extensions
             var assambly = Assembly.GetExecutingAssembly();
 
             services.AddScoped<IArticleService, ArticleService>();
+			services.AddScoped<ICategoryService, CategoryService>();
 
-            services.AddAutoMapper(assambly);
+
+			services.AddAutoMapper(assambly);
             //assambly bu sınıfın çağırıldıgı automapperınadd edildiği katmanın ismidir (service katmanı)
 
             return services;

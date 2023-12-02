@@ -18,8 +18,24 @@ namespace YoutubeBlog.Service.Services.Concretes
             this.mapper = mapper;
         }
 
-        //alttaki metotta demek istediğimiz bütün makaleleri kategorileriyle beraber getir ama silinmeyenleri getirtmek için bu şekilde isimlendiriyoruz
-        public async Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync()
+		public async Task CreateArticleAsync(ArticleAddDto articleAddDto)
+		{
+            var userId = Guid.Parse("1CA28C13-822E-45FA-99F1-7AA01B89D792");
+            var article = new Article
+            {
+                Title = articleAddDto.Title,
+                Content = articleAddDto.Content,
+                CategoryId = articleAddDto.CategoryId,
+                UserId = userId,
+            };
+
+            await unitOfWork.GetRepository<Article>().AddAsync(article);
+            await unitOfWork.SaveAsync();
+
+		}
+
+		//alttaki metotta demek istediğimiz bütün makaleleri kategorileriyle beraber getir ama silinmeyenleri getirtmek için bu şekilde isimlendiriyoruz
+		public async Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync()
         {
             var articles = await unitOfWork.GetRepository<Article>().GetAllAsync(x =>!x.IsDeleted, x=>x.Category);
             //x in başındaki ünlem false değer olması için konulmuştur normalde x true olarak gelir

@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 using System.Reflection;
+using YoutubeBlog.Service.FluentValidations;
 using YoutubeBlog.Service.Services.Abstractions;
 using YoutubeBlog.Service.Services.Concretes;
 
@@ -16,6 +20,13 @@ namespace YoutubeBlog.Service.Extensions
 
 
 			services.AddAutoMapper(assambly);
+
+            services.AddControllersWithViews().AddFluentValidation(opt =>
+            {
+                opt.RegisterValidatorsFromAssemblyContaining<ArticleValidator>();
+                opt.DisableDataAnnotationsValidation = true;
+                opt.ValidatorOptions.LanguageManager.Culture = new CultureInfo("en"); //dil seçeneği
+            });
             //assambly bu sınıfın çağırıldıgı automapperınadd edildiği katmanın ismidir (service katmanı)
 
             return services;

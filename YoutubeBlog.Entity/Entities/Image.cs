@@ -14,7 +14,7 @@ namespace YoutubeBlog.Entity.Entities
             FileType = fileType;
         }
         //başka bir kişi projeye erişim yaptığında ve bakmak istediğinde entity katmanındaki tablelarımın içine ne geleceğine tek tek bakmaması için bu uygulamayı yapıp
-        //içinde nelerin bulunması gerektiğini bu şekilde söylüyoruz
+        //içinde nelerin bulunması gerektiğini bu şekilde söylüyoruz    
         public string FileName { get; set; }
         public string FileType { get; set; }
 

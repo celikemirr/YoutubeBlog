@@ -43,7 +43,27 @@ namespace YoutubeBlog.Service.Services.Concretes
 
             return map;
         }
-    }
+		public async Task<ArticleDto> GetArticlesWithCategoryNonDeletedAsync(Guid articleId)
+		{
+			var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleId, x => x.Category);
+			//x in başındaki ünlem false değer olması için konulmuştur normalde x true olarak gelir
+			var map = mapper.Map<ArticleDto>(article);
+
+			return map;
+		}
+
+        public async Task UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
+        {
+            var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
+            
+            article.Title = articleUpdateDto.Title;
+            article.Content = articleUpdateDto.Content;
+            article.CategoryId = articleUpdateDto.CategoryId;
+
+            await unitOfWork.GetRepository<Article>().UpdateAsync(article);
+            await unitOfWork.SaveAsync();
+        }
+	}
     //servislerde filtreleme kullanabileceğimiz için örnek oluşturulma tarihi en son olanı başta getir gibi
     //bunun gibi durumlar söz konusu olacağı için bu yapıyı kullanıcaz
 }

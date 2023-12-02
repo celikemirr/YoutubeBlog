@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using YoutubeBlog.Entity.DTOS.Articles;
+using YoutubeBlog.Entity.Entities;
 using YoutubeBlog.Service.Services.Abstractions;
 
 namespace YoutubeBlog.Web.Areas.Admin.Controllers
@@ -9,11 +11,13 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 	{
 		private readonly IArticleService articleService;
 		private readonly ICategoryService categoryService;
+		private readonly IMapper mapper;
 
-		public ArticleController(IArticleService articleService, ICategoryService categoryService)
+		public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper)
 		{
 			this.articleService = articleService;
 			this.categoryService = categoryService;
+			this.mapper = mapper;
 		}
 		public async Task<IActionResult> Index()
 		{
@@ -31,11 +35,33 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 		{
 
 			await articleService.CreateArticleAsync(articleAddDto);
-			RedirectToAction("Index","Article", new {area = "Admin"});
+			RedirectToAction("Index", "Article", new { area = "Admin" });
 
 
 			var categories = await categoryService.GetAllCategoriesNonDeleted();
 			return View(new ArticleAddDto { Categories = categories });
+		}
+		[HttpGet]
+		public async Task<IActionResult> Update(Guid articleId)
+		{
+			var article = await articleService.GetArticlesWithCategoryNonDeletedAsync(articleId);
+			var categories = await categoryService.GetAllCategoriesNonDeleted();
+
+			var articleUpdateDto = mapper.Map<ArticleUpdateDto>(article);
+			articleUpdateDto.Categories = categories;
+
+			return View(articleUpdateDto);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Update(ArticleUpdateDto articleUpdateDto)
+		{
+
+			await articleService.UpdateArticleAsync(articleUpdateDto);
+
+			var categories = await categoryService.GetAllCategoriesNonDeleted();
+			articleUpdateDto.Categories = categories;
+
+			return View(articleUpdateDto);
 		}
 	}
 }

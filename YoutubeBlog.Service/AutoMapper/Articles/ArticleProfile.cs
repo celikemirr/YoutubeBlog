@@ -10,6 +10,8 @@ namespace YoutubeBlog.Service.AutoMapper.Articles
 		public ArticleProfile()
 		{
 			CreateMap<ArticleDto,Article>().ReverseMap();
+			CreateMap<ArticleUpdateDto,Article>().ReverseMap();
+			CreateMap<ArticleUpdateDto,ArticleDto>().ReverseMap();
 		}
 		//article ile işlem yapmak istersek articledto ile articledto ile işlem yapmak istersek article ile maplama yapabiliyoruz
 	}

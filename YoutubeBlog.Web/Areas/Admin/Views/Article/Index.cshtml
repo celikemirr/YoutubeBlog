@@ -50,7 +50,12 @@
 							<td>
 								@(article.IsDeleted ? "Aktif değil" : "Aktif")
 							</td>
-							<td></td>
+							<td>
+								<a class="btn btn-secondary btn-sm" data-id="@article.Id" 
+								asp-area="Admin" asp-controller="Article" asp-action="Update"
+								asp-route-articleId="@article.Id"
+								><i class="bx bxs-edit"></i></a>
+							</td>
 						</tr>
 					}
 				</tbody>

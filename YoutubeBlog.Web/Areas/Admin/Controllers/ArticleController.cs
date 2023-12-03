@@ -102,7 +102,9 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 
 		public async Task<IActionResult> Delete(Guid articleId)
 		{
-			await articleService.SafeDeleteArticleAsync(articleId);
+			var title = await articleService.SafeDeleteArticleAsync(articleId);
+			toast.AddSuccessToastMessage(Messages.Article.Delete(title), new ToastrOptions { Title = "" });
+
 			return RedirectToAction("Index", "Article", new { Area = "Admin" });
 		}
 	}

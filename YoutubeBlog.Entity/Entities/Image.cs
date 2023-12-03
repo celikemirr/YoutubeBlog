@@ -1,4 +1,5 @@
 ﻿using YoutubeBlog.Core.Entities;
+using YoutubeBlog.Entity.Enums;
 
 namespace YoutubeBlog.Entity.Entities
 {

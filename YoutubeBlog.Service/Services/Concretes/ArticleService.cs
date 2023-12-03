@@ -49,7 +49,7 @@ namespace YoutubeBlog.Service.Services.Concretes
 			return map;
 		}
 
-        public async Task UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
+        public async Task<string> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
         {
             var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
             
@@ -59,8 +59,10 @@ namespace YoutubeBlog.Service.Services.Concretes
 
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
+
+            return article.Title;
         }
-        public async Task SafeDeleteArticleAsync(Guid articleId)
+        public async Task<string> SafeDeleteArticleAsync(Guid articleId)
         {
             var article = await unitOfWork.GetRepository<Article>().GetByGuidAsync(articleId);
 
@@ -69,6 +71,8 @@ namespace YoutubeBlog.Service.Services.Concretes
 
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
+
+            return article.Title;
         }
 	}
     //servislerde filtreleme kullanabileceğimiz için örnek oluşturulma tarihi en son olanı başta getir gibi

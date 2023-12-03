@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using YoutubeBlog.Entity.DTOS.Articles;
 using YoutubeBlog.Entity.Entities;
 using YoutubeBlog.Service.Extensions;
 using YoutubeBlog.Service.Services.Abstractions;
+using YoutubeBlog.Web.ResultMessages;
 
 namespace YoutubeBlog.Web.Areas.Admin.Controllers
 {
@@ -15,13 +17,15 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 		private readonly ICategoryService categoryService;
 		private readonly IMapper mapper;
 		private readonly IValidator<Article> validator;
+		private readonly IToastNotification toast;
 
-		public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper, IValidator<Article> validator)
+		public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper, IValidator<Article> validator, IToastNotification toast)
 		{
 			this.articleService = articleService;
 			this.categoryService = categoryService;
 			this.mapper = mapper;
 			this.validator = validator;
+			this.toast = toast;
 		}
 		public async Task<IActionResult> Index()
 		{
@@ -34,6 +38,8 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 			var categories = await categoryService.GetAllCategoriesNonDeleted();
 			return View(new ArticleAddDto { Categories = categories });
 		}
+
+
 		[HttpPost]
 		public async Task<IActionResult> Add(ArticleAddDto articleAddDto)
 		{
@@ -43,6 +49,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 			if (result.IsValid)
 			{
 				await articleService.CreateArticleAsync(articleAddDto);
+				toast.AddSuccessToastMessage(Messages.Article.Add(articleAddDto.Title), new ToastrOptions { Title = "" });
 				return RedirectToAction("Index", "Article", new { area = "Admin" });
 
 			}
@@ -55,6 +62,8 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 			var categories = await categoryService.GetAllCategoriesNonDeleted();
 			return View(new ArticleAddDto { Categories = categories });
 		}
+
+
 		[HttpGet]
 		public async Task<IActionResult> Update(Guid articleId)
 		{
@@ -66,6 +75,8 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 
 			return View(articleUpdateDto);
 		}
+
+
 		[HttpPost]
 		public async Task<IActionResult> Update(ArticleUpdateDto articleUpdateDto)
 		{
@@ -74,7 +85,9 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 
 			if (result.IsValid)
 			{
-				await articleService.UpdateArticleAsync(articleUpdateDto);
+				var title = await articleService.UpdateArticleAsync(articleUpdateDto);
+				toast.AddSuccessToastMessage(Messages.Article.Update(title), new ToastrOptions { Title = "" });
+				return RedirectToAction("Index", "Article", new { Area = "Admin" });
 
 			}
 			else
@@ -86,6 +99,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
 			articleUpdateDto.Categories = categories;
 			return View(articleUpdateDto);
 		}
+
 		public async Task<IActionResult> Delete(Guid articleId)
 		{
 			await articleService.SafeDeleteArticleAsync(articleId);

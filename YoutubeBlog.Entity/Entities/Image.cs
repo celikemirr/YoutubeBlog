@@ -9,10 +9,11 @@ namespace YoutubeBlog.Entity.Entities
         {
             
         }
-        public Image(string fileName, string fileType)
+        public Image(string fileName, string fileType, string createdBy)
         {
             FileName = fileName;
             FileType = fileType;
+            CreatedBy = createdBy;
         }
         //başka bir kişi projeye erişim yaptığında ve bakmak istediğinde entity katmanındaki tablelarımın içine ne geleceğine tek tek bakmaması için bu uygulamayı yapıp
         //içinde nelerin bulunması gerektiğini bu şekilde söylüyoruz    

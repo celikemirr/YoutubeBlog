@@ -5,7 +5,9 @@ using System.Security.Claims;
 using YoutubeBlog.Data.UnitOfWorks;
 using YoutubeBlog.Entity.DTOS.Articles;
 using YoutubeBlog.Entity.Entities;
+using YoutubeBlog.Entity.Enums;
 using YoutubeBlog.Service.Extensions;
+using YoutubeBlog.Service.Helpers.Images;
 using YoutubeBlog.Service.Services.Abstractions;
 
 
@@ -16,13 +18,15 @@ namespace YoutubeBlog.Service.Services.Concretes
 		private readonly IUnitOfWork unitOfWork;
 		private readonly IMapper mapper;
 		private readonly IHttpContextAccessor httpContextAccessor;
+		private readonly IImageHelper imageHelper;
 		private readonly ClaimsPrincipal _user;
 
-		public ArticleService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+		public ArticleService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor,IImageHelper imageHelper)
 		{
 			this.unitOfWork = unitOfWork;
 			this.mapper = mapper;
 			this.httpContextAccessor = httpContextAccessor;
+			this.imageHelper = imageHelper;
 			_user = httpContextAccessor.HttpContext.User;
 		}
 
@@ -31,13 +35,14 @@ namespace YoutubeBlog.Service.Services.Concretes
 			var userId = _user.GetLoggedInUserId(); // Id ile giriş yapan kullanıcıyı bulma
 			var userEmail = _user.GetLoggedInEmail(); // E mail ile giriş yapan kullanıcıyı bulma
 
-			var imageId = Guid.Parse("10C694E0-0796-4AB4-B664-C8B74830CA68");
-			var article = new Article(articleAddDto.Title, articleAddDto.Content, userId, userEmail, articleAddDto.CategoryId, imageId);
+			var imageUpload = await imageHelper.Upload(articleAddDto.Title, articleAddDto.Photo, ImageType.Post);
+			Image image = new(imageUpload.FullName, articleAddDto.Photo.ContentType, userEmail);
+			await unitOfWork.GetRepository<Image>().AddAsync(image);
 
+			var article = new Article(articleAddDto.Title, articleAddDto.Content, userId, userEmail, articleAddDto.CategoryId, image.Id);
 
 			await unitOfWork.GetRepository<Article>().AddAsync(article);
 			await unitOfWork.SaveAsync();
-
 		}
 
 		//alttaki metotta demek istediğimiz bütün makaleleri kategorileriyle beraber getir ama silinmeyenleri getirtmek için bu şekilde isimlendiriyoruz
@@ -51,7 +56,7 @@ namespace YoutubeBlog.Service.Services.Concretes
 		}
 		public async Task<ArticleDto> GetArticlesWithCategoryNonDeletedAsync(Guid articleId)
 		{
-			var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleId, x => x.Category);
+			var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleId, x => x.Category, a => a.Image);
 			//x in başındaki ünlem false değer olması için konulmuştur normalde x true olarak gelir
 			var map = mapper.Map<ArticleDto>(article);
 
@@ -61,8 +66,18 @@ namespace YoutubeBlog.Service.Services.Concretes
 		public async Task<string> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
 		{
 			var userEmail = _user.GetLoggedInEmail(); // E mail ile giriş yapan kullanıcıyı bulma
+			var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category, a => a.Image);
 
-			var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
+			if(articleUpdateDto.Photo != null)
+			{
+				imageHelper.Delete(article.Image.FileName);
+
+				var imageUpload = await imageHelper.Upload(articleUpdateDto.Title, articleUpdateDto.Photo, ImageType.Post);
+				Image image = new(imageUpload.FullName, articleUpdateDto.Photo.ContentType, userEmail);
+				await unitOfWork.GetRepository<Image>().AddAsync(image);
+
+				article.ImageId = image.Id;
+			}
 
 			article.Title = articleUpdateDto.Title;
 			article.Content = articleUpdateDto.Content;

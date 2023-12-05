@@ -10,6 +10,14 @@
 	<span class="menu-header-text"> CONTROLPAGE </span>
 </li>
 <!-- Pages -->
+
+<li class="menu-item">
+	<a asp-area="Admin" asp-controller="Article" asp-action="Index" class="menu-link">
+		<i class='menu-icon bx bx-paper-plane'></i>
+		<div data-i18n="Analytics"> ArticleControl </div>
+	</a>
+</li>
+
 <li class="menu-item">
 	<a asp-area="Admin" asp-controller="Category" asp-action="Index" class="menu-link">
 		<i class='menu-icon bx bx-category-alt'></i>
@@ -23,14 +31,6 @@
 		<div data-i18n="Analytics"> MediaControl </div>
 	</a>
 </li>
-
-<li class="menu-item">
-	<a asp-area="Admin" asp-controller="Article" asp-action="Index" class="menu-link">
-		<i class='menu-icon bx bx-paper-plane'></i>
-		<div data-i18n="Analytics"> ArticleControl </div>
-	</a>
-</li>
-
 <!-- Users -->
 <li class="menu-header small text-uppercase"><span class="menu-header-text"> USERS </span></li>
 <!-- Cards -->

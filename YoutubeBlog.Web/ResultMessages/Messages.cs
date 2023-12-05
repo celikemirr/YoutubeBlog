@@ -17,5 +17,20 @@
 				return $"{articleTitle} Article deleted successfully";
 			}
 		}
+		public static class Category
+		{
+			public static string Add(string categoryName)
+			{
+				return $"{categoryName} Category completed successfully";
+			}
+			public static string Update(string categoryName)
+			{
+				return $"{categoryName} Category updated successfully";
+			}
+			public static string Delete(string categoryName)
+			{
+				return $"{categoryName} Category deleted successfully";
+			}
+		}
 	}
 }
